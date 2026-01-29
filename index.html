@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Onyx Access | Convite Exclusivo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        fontFamily: { sans: ['Inter', 'sans-serif'] },
+        extend: {
+          colors: {
+            emeraldx: '#00E676',
+            darkx: '#0B0B0B'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-darkx text-white">
+
+<section class="min-h-screen flex items-center justify-center px-6">
+  <div class="max-w-md w-full text-center">
+    <h1 class="text-3xl font-bold mb-4">ACESSO EXCLUSIVO LIBERADO</h1>
+    <p class="text-gray-400 mb-6">
+      Uma experiência online restrita para quem entra no momento certo
+    </p>
+
+    <button onclick="openModal()"
+      class="w-full bg-emeraldx text-black font-semibold py-4 rounded-2xl text-lg">
+      LIBERAR MEU ACESSO
+    </button>
+
+    <p class="text-xs text-gray-500 mt-3">⏳ Convites limitados • Sem cartão</p>
+  </div>
+</section>
+
+<div id="modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center px-4">
+  <div class="bg-[#121212] rounded-2xl p-6 w-full max-w-sm">
+    <h2 class="text-xl font-semibold mb-3 text-center">Confirmar acesso</h2>
+
+    <input id="email" type="email" placeholder="seu@email.com"
+      class="w-full mb-4 p-3 rounded-xl bg-black border border-gray-700">
+
+    <button onclick="register()"
+      class="w-full bg-emeraldx text-black font-semibold py-3 rounded-xl">
+      CONFIRMAR
+    </button>
+
+    <button onclick="closeModal()" class="w-full mt-3 text-xs text-gray-500">
+      cancelar
+    </button>
+  </div>
+</div>
+
+<script>
+function openModal(){ modal.classList.remove('hidden') }
+function closeModal(){ modal.classList.add('hidden') }
+
+async function register(){
+  const email = document.getElementById('email').value;
+  if(!email) return alert('Digite um e-mail válido');
+
+  await fetch('/api/register',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({email})
+  });
+
+  window.location.href = 'https://SEU-DESTINO.com';
+}
+</script>
+
+</body>
+</html>
